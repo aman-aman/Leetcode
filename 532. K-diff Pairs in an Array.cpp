@@ -3,19 +3,28 @@ class Solution {
 public:
     int findPairs(vector<int>& nums, int k)
     {
-        sort(nums.begin(),nums.end());
-        for(int i=0;i<nums.size()-1;i++)
+        if(nums.size()==0||k<0)
+            return 0;
+        map<int,int> mp;
+        for(auto x:nums)
+            mp[x]++;
+
+        int c=0;
+        for(auto x:nums)
         {
-            for(int j=i+1;j<nums.size();j++)
+            if(mp.find(x)==mp.end())
+                continue;
+            if(k==0)
+                c+=mp[x]>=2?1:0;
+            else
             {
-                if(a[j]-a[i]==target)
+                if(mp.find(x-k)!=mp.end())
                     c++;
-                if(a[j]-a[i]>target)
-                    break;
+                if(mp.find(x+k)!=mp.end())
+                    c++;
             }
+            mp.erase(x);
         }
         return c;
-
     }
 };
-
