@@ -1,0 +1,26 @@
+class Solution {
+    vector<vector<int> > ans;
+        vector<int> cur;
+public:
+        
+     void findcombination(vector<int> a,int index,int sum,vector<int> cur)
+    {
+        if(sum==0)
+            ans.push_back(cur);
+         
+        if(sum<0)return ;
+         
+        for(int i=index;i<a.size();i++)
+        {
+                cur.push_back(a[i]);
+                findcombination(a,i,sum-a[i],cur);
+                cur.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& a, int sum) {
+        //sort(a.begin(),a.end());
+        findcombination(a,0,sum,cur);
+        return ans;
+    }
+   
+};
